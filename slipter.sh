@@ -21,13 +21,21 @@ while true ;do
 	curant=$PWD
 	foldername=$(echo ../part_$(find -type f|head -n 1|grep [0-9]* -o)-$(find -type f|tail  -n 1 |grep  [0-9]*  -o))
 	cd $var
+	mv $curant $foldername
+
 	if [ $(du  -s|grep [0-9]*  -o) -lt 500000 ];then
 		break
 	fi
-	mv $curant $foldername
 
 	var=../partie-$((compte+=1))
 	mkdir $var
 done
-
+cd ..
 find -type d -maxdepth 1 -regex ".*part_.*"|xargs -I {} zip {}.zip {} *.blend -r
+
+
+for i in part_*; do
+rm cache
+cp  $i cache
+zip Packed-$i.zip *.blend cache/ -r
+done
