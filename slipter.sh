@@ -15,7 +15,7 @@ compte=1
 var=../partie-1
 mkdir $var
 while true ;do
-	while [ $(du  -s|grep [0-9]*  -o) -gt 500000 ]; do
+	while [ $(du  -s|grep [0-9]*  -o) -gt 450000 ]; do
 		find -type f|sort  -t 0 -k 2|tail -n  3|xargs -I {} -t bash -c 'pmv "$@"' _ {} $var
 	done
 	curant=$PWD
@@ -23,7 +23,7 @@ while true ;do
 	cd $var
 	mv $curant $foldername
 
-	if [ $(du  -s|grep [0-9]*  -o) -lt 500000 ];then
+	if [ $(du  -s|grep [0-9]*  -o) -lt 450000 ];then
 		break
 	fi
 
